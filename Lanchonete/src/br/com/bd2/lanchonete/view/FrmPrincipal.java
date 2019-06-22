@@ -79,6 +79,15 @@ public class FrmPrincipal extends JFrame {
 			}
 		});
 		mnMenus.add(mntmGerenciamentoDeFornecedores);
+		
+		JMenuItem mntmGerenciamentoDeEstoque = new JMenuItem("Gerenciamento de Estoque");
+		mntmGerenciamentoDeEstoque.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmEstoque festq = new FrmEstoque();
+				festq.setVisible(true);
+			}
+		});
+		mnMenus.add(mntmGerenciamentoDeEstoque);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

@@ -2,7 +2,6 @@ package br.com.bd2.lanchonete.negocio;
 
 public class Ingrediente {
 	Integer codIngrediente;
-	String descricao;
 	String nome;
 	Double quantidade;
 	
@@ -17,12 +16,6 @@ public class Ingrediente {
 	}
 	public void setCodIngrediente(Integer codIngrediente) {
 		this.codIngrediente = codIngrediente;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 	public String getNome() {
 		return nome;

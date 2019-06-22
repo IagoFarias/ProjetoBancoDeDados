@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.bd2.lanchonete.negocio.Cliente;
+
 import br.com.bd2.lanchonete.negocio.Funcionario;
 
 public class FuncionarioDAOImp implements FuncionarioDAO{
