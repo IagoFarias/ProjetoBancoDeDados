@@ -27,7 +27,7 @@ public class FornecedorController {
 		return dao.listarTodos();
 	}
 
-	public Fornecedor pesquisarPorCpf(String cnpj) {
+	public Fornecedor pesquisarPorCnpj(String cnpj) {
 		FornecedorDAOImp dao = new FornecedorDAOImp();
 		return dao.pesquisarPorCnpj(cnpj);
 	}

@@ -44,7 +44,6 @@ public class FrmCliente extends JFrame {
 			public void run() {
 				try {
 					FrmCliente frame = new FrmCliente();
-					frame.setTitle("Gerenciamento de Clientes");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,6 +56,7 @@ public class FrmCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmCliente() {
+		setTitle("Gerenciamento de Clientes");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 703, 413);
 		contentPane = new JPanel();

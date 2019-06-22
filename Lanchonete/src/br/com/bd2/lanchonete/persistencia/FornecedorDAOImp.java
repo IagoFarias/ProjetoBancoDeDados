@@ -19,8 +19,8 @@ public class FornecedorDAOImp implements FornecedorDAO {
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, forn.getNome());
 			pst.setString(2, forn.getCpnj());
-			pst.setString(4, forn.getEndereco());
-			pst.setString(5, forn.getContato());
+			pst.setString(3, forn.getEndereco());
+			pst.setString(4, forn.getContato());
 
 			int res = pst.executeUpdate();
 			if (res > 0) {
