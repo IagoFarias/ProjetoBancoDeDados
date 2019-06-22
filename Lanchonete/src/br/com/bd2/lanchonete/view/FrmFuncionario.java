@@ -27,6 +27,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class FrmFuncionario extends JFrame {
 
@@ -36,6 +38,7 @@ public class FrmFuncionario extends JFrame {
 	private JTextField txtEndereco;
 	private JTextField txtContato;
 	private JTable tblConsulta;
+	JLabel lblMensagem = new JLabel("Mensagem:");
 
 	/**
 	 * Launch the application.
@@ -46,6 +49,7 @@ public class FrmFuncionario extends JFrame {
 				try {
 					FrmFuncionario frame = new FrmFuncionario();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,7 +63,7 @@ public class FrmFuncionario extends JFrame {
 	public FrmFuncionario() {
 		setTitle("Gerenciamento de Funcion\u00E1rios");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 755, 373);
+		setBounds(100, 100, 755, 399);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -70,21 +74,29 @@ public class FrmFuncionario extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel, GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
-								.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
-								.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 664, Short.MAX_VALUE))
-						.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(14, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 
 		JLabel lblNome = new JLabel("Nome:");
 
@@ -105,37 +117,55 @@ public class FrmFuncionario extends JFrame {
 
 		txtContato = new JTextField();
 		txtContato.setColumns(10);
+		
+		
+		lblMensagem.setForeground(Color.BLUE);
+		lblMensagem.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup().addComponent(lblNome)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE))
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(lblContato, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(txtContato, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup().addComponent(lblNewLabel)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup().addComponent(lblEndereo)
-								.addPreferredGap(ComponentPlacement.RELATED).addComponent(txtEndereco,
-										GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(253, Short.MAX_VALUE)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-				.createSequentialGroup()
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(lblNome).addComponent(txtNome,
-						GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel).addComponent(txtCpf,
-						GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(lblEndereo).addComponent(
-						txtEndereco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblContato).addComponent(
-						txtContato, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+							.addComponent(lblNome)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblContato, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtContato, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblNewLabel)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblEndereo)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtEndereco, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblMensagem))
+					.addContainerGap(412, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNome)
+						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel)
+						.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblEndereo)
+						.addComponent(txtEndereco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblContato)
+						.addComponent(txtContato, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+					.addComponent(lblMensagem))
+		);
 		panel.setLayout(gl_panel);
 
 		JButton btnInserir = new JButton("Cadastrar");
@@ -149,7 +179,7 @@ public class FrmFuncionario extends JFrame {
 				func.setEndereco(txtEndereco.getText());
 				func.setContato(txtContato.getText());
 
-				funcCO.inserir(func);
+				lblMensagem.setText("Mensagem: "+funcCO.inserir(func));
 
 			}
 		});
@@ -170,7 +200,7 @@ public class FrmFuncionario extends JFrame {
 							"Deseja excluir esse Funcionário: " + txtNome.getText() + "?", "Exclusão",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 					if (JOptionPane.YES_OPTION == i) {
-						funcCO.excluir(func);
+						lblMensagem.setText("Mensagem: "+funcCO.excluir(func));
 					}
 				}
 
@@ -188,13 +218,14 @@ public class FrmFuncionario extends JFrame {
 				func.setEndereco(txtEndereco.getText());
 				func.setContato(txtContato.getText());
 				
-				funcCO.alterar(func);
+				lblMensagem.setText("Mensagem: "+funcCO.alterar(func));
 			}
 		});
 
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblMensagem.setText("Mensagem: ");
 				List<Funcionario> listaFunc = new ArrayList<Funcionario>();
 				FuncionarioController funcCO = new FuncionarioController();
 
@@ -222,6 +253,7 @@ public class FrmFuncionario extends JFrame {
 		JButton btnPesquisarPorCpf = new JButton("Pesquisar Por CPF");
 		btnPesquisarPorCpf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblMensagem.setText("Mensagem: ");
 				FuncionarioController funcCO = new FuncionarioController();
 				Funcionario func = funcCO.pesquisarPorCpf(txtCpf.getText());
 				
@@ -247,6 +279,7 @@ public class FrmFuncionario extends JFrame {
 				txtCpf.setText("");
 				txtContato.setText("");
 				txtEndereco.setText("");
+				lblMensagem.setText("Mensagem: ");
 
 				DefaultTableModel tbm = (DefaultTableModel) tblConsulta.getModel();
 				for (int i = tbm.getRowCount() - 1; i >= 0; i--) {

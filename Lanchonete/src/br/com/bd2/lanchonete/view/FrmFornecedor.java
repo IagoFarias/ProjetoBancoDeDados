@@ -49,6 +49,7 @@ public class FrmFornecedor extends JFrame {
 				try {
 					FrmFornecedor frame = new FrmFornecedor();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -186,7 +187,7 @@ public class FrmFornecedor extends JFrame {
 							"Deseja excluir esse Fornecedor: " + txtNome.getText() + "?", "Exclusão",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 					if (JOptionPane.YES_OPTION == i) {
-						fornCo.excluir(forn);
+						lblMensagem.setText("Mensagem:" + fornCo.excluir(forn));
 					}
 				}
 
@@ -196,6 +197,7 @@ public class FrmFornecedor extends JFrame {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblMensagem.setText("Mensagem:");
 				List<Fornecedor> listaForn = new ArrayList<Fornecedor>();
 				FornecedorController fornCo = new FornecedorController();
 
@@ -248,6 +250,7 @@ public class FrmFornecedor extends JFrame {
 				txtCnpj.setText("");
 				txtContato.setText("");
 				txtEndereco.setText("");
+				lblMensagem.setText("Mensagem:");
 
 				DefaultTableModel tbm = (DefaultTableModel) tblConsulta.getModel();
 				for (int i = tbm.getRowCount() - 1; i >= 0; i--) {

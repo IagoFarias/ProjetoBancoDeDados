@@ -18,6 +18,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class FrmPrincipal extends JFrame {
 
@@ -32,6 +33,7 @@ public class FrmPrincipal extends JFrame {
 				try {
 					FrmPrincipal frame = new FrmPrincipal();
 					frame.setVisible(true);
+					frame.setExtendedState(MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,7 +52,7 @@ public class FrmPrincipal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnMenus = new JMenu("Menus");
+		JMenu mnMenus = new JMenu("Menu");
 		menuBar.add(mnMenus);
 		
 		JMenuItem mntmGerenciamentoDeClientes = new JMenuItem("Gerenciamento de Clientes");
@@ -58,6 +60,7 @@ public class FrmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				FrmCliente fcli = new FrmCliente();
 				fcli.setVisible(true);
+				fcli.setLocationRelativeTo(null);
 			}
 		});
 		mnMenus.add(mntmGerenciamentoDeClientes);
@@ -67,6 +70,7 @@ public class FrmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				FrmFuncionario ffun = new FrmFuncionario();
 				ffun.setVisible(true);
+				ffun.setLocationRelativeTo(null);
 			}
 		});
 		mnMenus.add(mntmGerenciamentoDeFuncionrios);
@@ -76,6 +80,7 @@ public class FrmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				FrmFornecedor fforn = new FrmFornecedor();
 				fforn.setVisible(true);
+				fforn.setLocationRelativeTo(null);
 			}
 		});
 		mnMenus.add(mntmGerenciamentoDeFornecedores);
@@ -85,6 +90,7 @@ public class FrmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				FrmEstoque festq = new FrmEstoque();
 				festq.setVisible(true);
+				festq.setLocationRelativeTo(null);
 			}
 		});
 		mnMenus.add(mntmGerenciamentoDeEstoque);
@@ -93,22 +99,24 @@ public class FrmPrincipal extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblTopLanches = new JLabel("Top Lanches");
+		lblTopLanches.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTopLanches.setVerticalAlignment(SwingConstants.CENTER);
 		lblTopLanches.setForeground(Color.BLUE);
-		lblTopLanches.setFont(new Font("Vineta BT", Font.PLAIN, 35));
+		lblTopLanches.setFont(new Font("Vineta BT", Font.PLAIN, 50));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(91)
-					.addComponent(lblTopLanches)
-					.addContainerGap(97, Short.MAX_VALUE))
+					.addGap(87)
+					.addComponent(lblTopLanches, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(101))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(83)
-					.addComponent(lblTopLanches)
-					.addContainerGap(112, Short.MAX_VALUE))
+					.addGap(87)
+					.addComponent(lblTopLanches, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(108))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

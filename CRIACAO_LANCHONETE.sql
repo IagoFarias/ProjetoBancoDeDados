@@ -65,6 +65,7 @@ constraint pk_fornecedor primary key (cnpj)
 create table pedido(
 numero int not null auto_increment,
 cpf_cliente varchar(11) not null,
+cod_funcionario int not null,
 pedido_status varchar(15) DEFAULT 'Pendente',
 valor numeric(5,2), 
 observacao varchar(200),	
@@ -72,8 +73,10 @@ data_hora datetime,
 
 constraint pk_pedido primary key (numero),
 constraint fk_cliente foreign key (cpf_cliente) references cliente(cpf),
+constraint fk_funcionario foreign key (cod_funcionario) references funcionario(codigo),
 constraint chk_pedido check(valor>=0) 
 );
+
 
 create table itens_pedido(
 numero_pedido int not null,
@@ -85,7 +88,6 @@ constraint fk_pedido foreign key (numero_pedido) references pedido(numero),
 constraint fk_cod_item_cardapio foreign key (cod_item_cardapio) references cardapio(codigo_item),
 constraint chk_itens_pedido check(quantidade>=0)
 );
-
 
 insert into cliente values ('João','45578411122','Rua 01 casa 3','41 5555 2222');
 insert into cliente values ('Maria','45578411142','Rua 01 casa 7','41 5555 7722');
@@ -134,22 +136,30 @@ end $
 delimiter ;
 
 
+delimiter $
+create procedure atualiza_estoque (in p_codigo int,in p_qtde numeric (5,2))
+begin
 
-/*create procedure atualiza_estoque (in p_codigo)
-begin*/
+update ingrediente
+set quantidade_estoque = quantidade_estoque+p_qtde
+where codigo = p_codigo;
 
+end$
+delimiter ;
 
+drop procedure atualiza_estoque;
 
 select * from pedido;
 
 
+select * from fornecedor;	
 
 select * from ingrediente;
+
+call atualiza_estoque(2,5.45);
 
 select * from itens_cardapio;
 
 select * from cliente;
 
-drop table funcionario;
-
-select * from funcionario;
+select * from funcionario;	

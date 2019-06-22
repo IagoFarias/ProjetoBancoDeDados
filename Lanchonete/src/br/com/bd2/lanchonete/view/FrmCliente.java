@@ -26,6 +26,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class FrmCliente extends JFrame {
 
@@ -35,6 +37,7 @@ public class FrmCliente extends JFrame {
 	private JTextField txtContato;
 	private JTextField txtEndereco;
 	private JTable tblConsulta;
+	JLabel lblMensagem = new JLabel("Mensagem:");
 
 	/**
 	 * Launch the application.
@@ -45,6 +48,7 @@ public class FrmCliente extends JFrame {
 				try {
 					FrmCliente frame = new FrmCliente();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -69,21 +73,24 @@ public class FrmCliente extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup()
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
-						.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
-						.addComponent(panel_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
-				.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(21, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+						.addComponent(panel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
+		);
 
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
@@ -146,7 +153,7 @@ public class FrmCliente extends JFrame {
 				cli.setContato(txtContato.getText());
 				cli.setEndereco(txtEndereco.getText());
 				
-				cliCon.inserir(cli);
+				lblMensagem.setText("Mensagem: "+cliCon.inserir(cli));
 
 			}
 		});
@@ -161,7 +168,7 @@ public class FrmCliente extends JFrame {
 				cli.setContato(txtContato.getText());
 				cli.setEndereco(txtEndereco.getText());
 				
-				cliCon.alterar(cli);
+				lblMensagem.setText("Mensagem: "+cliCon.alterar(cli));
 				
 			}
 		});
@@ -184,7 +191,7 @@ public class FrmCliente extends JFrame {
 					int i = JOptionPane.showOptionDialog(null, "Deseja excluir esse Cliente: " + txtNome.getText() + "?",
 							"Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 					if (JOptionPane.YES_OPTION == i) {
-						cliCon.excluir(cli);
+						lblMensagem.setText("Mensagem: "+cliCon.excluir(cli));
 					}
 				}
 	
@@ -194,6 +201,7 @@ public class FrmCliente extends JFrame {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblMensagem.setText("Mensagem: ");
 				List<Cliente> listaCli = new ArrayList<Cliente>();
 				ClienteController cliCon = new ClienteController();
 				
@@ -219,6 +227,7 @@ public class FrmCliente extends JFrame {
 		JButton btnBuscarPorCpf = new JButton("Buscar Por CPF");
 		btnBuscarPorCpf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblMensagem.setText("Mensagem: ");
 				ClienteController cliCon = new ClienteController();
 				Cliente cli = cliCon.pesquisarPorCpf(txtCpf.getText());
 				
@@ -243,6 +252,7 @@ public class FrmCliente extends JFrame {
 				txtCpf.setText("");
 				txtContato.setText("");
 				txtEndereco.setText("");
+				lblMensagem.setText("Mensagem: ");
 				
 				DefaultTableModel tbm = (DefaultTableModel)tblConsulta.getModel();
 				for(int i = tbm.getRowCount()-1; i >= 0; i--){
@@ -312,6 +322,10 @@ public class FrmCliente extends JFrame {
 
 		txtEndereco = new JTextField();
 		txtEndereco.setColumns(10);
+		
+		JLabel lblMensagem = new JLabel("Mensagem:");
+		lblMensagem.setForeground(Color.BLUE);
+		lblMensagem.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -332,8 +346,9 @@ public class FrmCliente extends JFrame {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblCpf)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(130, Short.MAX_VALUE))
+							.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblMensagem))
+					.addContainerGap(255, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -354,7 +369,8 @@ public class FrmCliente extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblEndereo)
 						.addComponent(txtEndereco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(16, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+					.addComponent(lblMensagem))
 		);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);

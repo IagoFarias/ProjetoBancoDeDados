@@ -35,9 +35,26 @@ public class IngredienteDAOImp implements IngredienteDAO{
 	}
 
 	@Override
-	public String atualizaEstoque(Double qtd) {
-		// TODO Fazer com procedure ou função
-		return null;
+	public String atualizaEstoque(Double qtd,Integer cod) {
+		String sql = "call atualiza_estoque(?,?)";
+		Connection con = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setInt(1,cod);
+			pst.setDouble(2,qtd);
+	
+			int res = pst.executeUpdate();
+			if (res > 0) {
+				return "Estoque atualizado!";
+			} else {
+				return "Erro ao atualizar estoque!";
+			}
+		} catch (SQLException e) {
+			return e.getMessage();
+		} finally {
+			ConnectionFactory.close(con);
+		}
+	
 	}
 
 	@Override

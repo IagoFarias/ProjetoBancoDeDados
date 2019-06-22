@@ -11,9 +11,9 @@ public class IngredienteController {
 		return dao.inserir(ing);
 	}
 	
-	public String atualizaEstoque(Double qtd) {
+	public String atualizaEstoque(Double qtd,Integer cod) {
 		IngredienteDAOImp dao = new IngredienteDAOImp();
-		return dao.atualizaEstoque(qtd);
+		return dao.atualizaEstoque(qtd,cod);
 	}
 	public String excluir(Ingrediente ing) {
 		IngredienteDAOImp dao = new IngredienteDAOImp();

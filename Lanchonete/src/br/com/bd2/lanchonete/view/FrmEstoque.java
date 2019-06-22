@@ -28,6 +28,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class FrmEstoque extends JFrame {
 
@@ -36,6 +38,7 @@ public class FrmEstoque extends JFrame {
 	private JTextField txtQtd;
 	private JTextField txtCod;
 	private JTable tblConsulta;
+	JLabel lblMensagem = new JLabel("Mensagem:");
 
 	/**
 	 * Launch the application.
@@ -46,6 +49,7 @@ public class FrmEstoque extends JFrame {
 				try {
 					FrmEstoque frame = new FrmEstoque();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -149,12 +153,17 @@ public class FrmEstoque extends JFrame {
 		JButton btnAtualizarQuantidade = new JButton("Atualizar Quantidade");
 		btnAtualizarQuantidade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				IngredienteController ingCo = new IngredienteController();
+				
+				lblMensagem.setText("Mensagem: "+ingCo.atualizaEstoque(Double.parseDouble(txtQtd.getText()),Integer.parseInt(txtCod.getText())));
+				
 			}
 		});
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblMensagem.setText("Mensagem:");
 				List<Ingrediente> listaIng = new ArrayList<Ingrediente>();
 				IngredienteController ingCo = new IngredienteController();
 
@@ -191,7 +200,7 @@ public class FrmEstoque extends JFrame {
 						"Deseja excluir esse Ingrediente: " + txtNome.getText() + "?", "Exclusão",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 				if (JOptionPane.YES_OPTION == i) {
-					ingCo.excluir(ing);
+					lblMensagem.setText("Mensagem: "+ingCo.excluir(ing));
 				}
 			}
 		});
@@ -202,6 +211,7 @@ public class FrmEstoque extends JFrame {
 				txtNome.setText("");
 				txtQtd.setText("");
 				txtCod.setText("");
+				lblMensagem.setText("Mensagem:");
 				
 				DefaultTableModel tbm = (DefaultTableModel) tblConsulta.getModel();
 				for (int i = tbm.getRowCount() - 1; i >= 0; i--) {
@@ -226,7 +236,7 @@ public class FrmEstoque extends JFrame {
 				ing.setNome(txtNome.getText());
 				ing.setQuantidade(Double.parseDouble(txtQtd.getText()));
 				
-				ingCo.inserir(ing);
+				lblMensagem.setText("Mensagem: "+ingCo.inserir(ing));
 			}
 		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -238,13 +248,13 @@ public class FrmEstoque extends JFrame {
 					.addComponent(btnPesquisar)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnCadastrar)
-					.addGap(56)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnExcluir)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnLimpar)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnSair)
-					.addContainerGap(83, Short.MAX_VALUE))
+					.addContainerGap(133, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -253,10 +263,10 @@ public class FrmEstoque extends JFrame {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnAtualizarQuantidade)
 						.addComponent(btnPesquisar)
-						.addComponent(btnSair)
-						.addComponent(btnLimpar)
+						.addComponent(btnCadastrar)
 						.addComponent(btnExcluir)
-						.addComponent(btnCadastrar))
+						.addComponent(btnLimpar)
+						.addComponent(btnSair))
 					.addContainerGap(19, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
@@ -275,6 +285,10 @@ public class FrmEstoque extends JFrame {
 		
 		txtCod = new JTextField();
 		txtCod.setColumns(10);
+		
+		
+		lblMensagem.setForeground(Color.BLUE);
+		lblMensagem.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -291,7 +305,8 @@ public class FrmEstoque extends JFrame {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblCdigo)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtCod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(txtCod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblMensagem))
 					.addContainerGap(404, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
@@ -308,10 +323,10 @@ public class FrmEstoque extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblCdigo)
 						.addComponent(txtCod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(34, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+					.addComponent(lblMensagem))
 		);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }

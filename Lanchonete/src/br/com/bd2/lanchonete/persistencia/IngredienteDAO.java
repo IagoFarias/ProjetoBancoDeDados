@@ -6,7 +6,7 @@ import br.com.bd2.lanchonete.negocio.Ingrediente;
 
 public interface IngredienteDAO {
 	public String inserir(Ingrediente ing);
-	public String atualizaEstoque(Double qtd);
+	public String atualizaEstoque(Double qtd,Integer cod);
 	public String excluir(Ingrediente ing);
 	public List<Ingrediente> listarTodos();
 }
