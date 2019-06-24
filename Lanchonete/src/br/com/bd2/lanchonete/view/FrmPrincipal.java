@@ -94,6 +94,25 @@ public class FrmPrincipal extends JFrame {
 			}
 		});
 		mnMenus.add(mntmGerenciamentoDeEstoque);
+		
+		JMenu mnGerenciamentoDePedidos = new JMenu("Gerenciamento de Pedidos");
+		mnMenus.add(mnGerenciamentoDePedidos);
+		
+		JMenuItem mntmGerarNovoPedido = new JMenuItem("Gerar Novo Pedido");
+		mntmGerarNovoPedido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmPedido frame = new FrmPedido();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
+		mnGerenciamentoDePedidos.add(mntmGerarNovoPedido);
+		
+		JMenuItem mntmConsultarPedidos = new JMenuItem("Consultar Pedidos");
+		mnGerenciamentoDePedidos.add(mntmConsultarPedidos);
+		
+		JMenuItem mntmEstatsticas = new JMenuItem("Estat\u00EDsticas");
+		mnGerenciamentoDePedidos.add(mntmEstatsticas);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
