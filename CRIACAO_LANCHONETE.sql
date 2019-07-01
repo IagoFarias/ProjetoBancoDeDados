@@ -1,5 +1,6 @@
 create database lanchonete;
 
+# Teste 1
 use lanchonete;
 
 create table cliente(
