@@ -109,10 +109,47 @@ public class FrmPrincipal extends JFrame {
 		mnGerenciamentoDePedidos.add(mntmGerarNovoPedido);
 		
 		JMenuItem mntmConsultarPedidos = new JMenuItem("Consultar Pedidos");
+		mntmConsultarPedidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmConsultarPedidos frame = new FrmConsultarPedidos();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
 		mnGerenciamentoDePedidos.add(mntmConsultarPedidos);
 		
-		JMenuItem mntmEstatsticas = new JMenuItem("Estat\u00EDsticas");
-		mnGerenciamentoDePedidos.add(mntmEstatsticas);
+		JMenu mnEstatsticas = new JMenu("Estat\u00EDsticas");
+		mnGerenciamentoDePedidos.add(mnEstatsticas);
+		
+		JMenuItem mntmClientes = new JMenuItem("Clientes");
+		mntmClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmEstatCliente frame = new FrmEstatCliente();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
+		mnEstatsticas.add(mntmClientes);
+		
+		JMenuItem mntmPedidos = new JMenuItem("Pedidos");
+		mntmPedidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmEstatPedido frame = new FrmEstatPedido();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
+		mnEstatsticas.add(mntmPedidos);
+		
+		JMenuItem mntmFornecimento = new JMenuItem("Fornecimento");
+		mntmFornecimento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmEstatFornecedor frame = new FrmEstatFornecedor();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
+		mnEstatsticas.add(mntmFornecimento);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

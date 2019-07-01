@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.bd2.lanchonete.negocio.Fornecedor;
+import br.com.bd2.lanchonete.negocio.FornecedorEstat;
 
 public class FornecedorDAOImp implements FornecedorDAO {
 
@@ -24,8 +25,10 @@ public class FornecedorDAOImp implements FornecedorDAO {
 
 			int res = pst.executeUpdate();
 			if (res > 0) {
+				commit();
 				return "Inserido com sucesso.";
 			} else {
+				rollback();
 				return "Erro ao inserir.";
 			}
 		} catch (SQLException e) {
@@ -49,8 +52,10 @@ public class FornecedorDAOImp implements FornecedorDAO {
 
 			int res = pst.executeUpdate();
 			if (res > 0) {
+				commit();
 				return "Alterado com sucesso.";
 			} else {
+				rollback();
 				return "Erro ao alterar.";
 			}
 		} catch (SQLException e) {
@@ -69,8 +74,10 @@ public class FornecedorDAOImp implements FornecedorDAO {
 			pst.setString(1, forn.getCpnj());
 			int res = pst.executeUpdate();
 			if (res > 0) {
+				commit();
 				return "Excluído com sucesso.";
 			} else {
+				rollback();
 				return "Erro ao excluir.";
 			}
 		} catch (SQLException e) {
@@ -136,6 +143,137 @@ public class FornecedorDAOImp implements FornecedorDAO {
 			ConnectionFactory.close(con);
 
 		}
+	}
+	
+	public List<FornecedorEstat> pesquisarEstat() {
+		String sql = "select * from Controle_de_Estoque";
+		Connection con = ConnectionFactory.getConnection();
+		List<FornecedorEstat> lista = new ArrayList<>();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					FornecedorEstat fornEst = new FornecedorEstat();
+					
+					fornEst.nomeIngrediente=rs.getString(1);
+					fornEst.qtdEstoque=rs.getDouble(2);
+					fornEst.nomeFornecedor=rs.getString(3);
+					fornEst.contato=rs.getString(4);
+					fornEst.cNPJ=rs.getString(5);
+
+					
+
+					lista.add(fornEst);
+				}
+				return lista;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			return null;
+		} finally {
+			ConnectionFactory.close(con);
+		}
+	}
+	
+	public List<FornecedorEstat> pesquisarEstatNomeIng(String nomeIng) {
+		String sql = "select * from Controle_de_Estoque where Nome_Ingrediente = ?";
+		Connection con = ConnectionFactory.getConnection();
+		List<FornecedorEstat> lista = new ArrayList<>();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setString(1, nomeIng);
+			ResultSet rs = pst.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					FornecedorEstat fornEst = new FornecedorEstat();
+					
+					fornEst.nomeIngrediente=rs.getString(1);
+					fornEst.qtdEstoque=rs.getDouble(2);
+					fornEst.nomeFornecedor=rs.getString(3);
+					fornEst.contato=rs.getString(4);
+					fornEst.cNPJ=rs.getString(5);
+
+					
+
+					lista.add(fornEst);
+				}
+				return lista;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			return null;
+		} finally {
+			ConnectionFactory.close(con);
+		}
+	}
+	
+	public List<FornecedorEstat> pesquisarEstatNomeForn(String nomeForn) {
+		String sql = "select * from Controle_de_Estoque where Nome_Fornecedor = ?";
+		Connection con = ConnectionFactory.getConnection();
+		List<FornecedorEstat> lista = new ArrayList<>();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setString(1, nomeForn);
+			
+			ResultSet rs = pst.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					FornecedorEstat fornEst = new FornecedorEstat();
+					
+					fornEst.nomeIngrediente=rs.getString(1);
+					fornEst.qtdEstoque=rs.getDouble(2);
+					fornEst.nomeFornecedor=rs.getString(3);
+					fornEst.contato=rs.getString(4);
+					fornEst.cNPJ=rs.getString(5);
+
+					
+
+					lista.add(fornEst);
+				}
+				return lista;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			return null;
+		} finally {
+			ConnectionFactory.close(con);
+		}
+	}
+	
+	public String rollback() {
+		String sql = "call voltar()";
+		Connection con = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.executeUpdate();
+			return "Alterações desfeitas";
+
+		} catch (SQLException e) {
+			return e.getMessage();
+			
+		} finally {
+			ConnectionFactory.close(con);
+		}
+		
+	}
+	
+	public void commit() {
+		String sql = "call salvar()";
+		Connection con = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.executeQuery();
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(con);
+		}
+		
 	}
 
 }

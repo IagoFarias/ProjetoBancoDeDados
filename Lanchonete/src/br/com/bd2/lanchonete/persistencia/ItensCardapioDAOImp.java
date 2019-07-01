@@ -54,8 +54,10 @@ public class ItensCardapioDAOImp implements ItensCardapioDAO{
 			
 			int res = pst.executeUpdate();
 			if (res > 0) {
+				commit();
 				return "Inserido com sucesso.";
 			} else {
+				rollback();
 				return "Erro ao inserir.";
 			}
 		} catch (SQLException e) {
@@ -74,8 +76,10 @@ public class ItensCardapioDAOImp implements ItensCardapioDAO{
 			pst.setInt(1,itemC.getCodItem());
 			int res = pst.executeUpdate();
 			if (res > 0) {
+				commit();
 				return "Excluído com sucesso.";
 			} else {
+				rollback();
 				return "Erro ao excluir.";
 			}
 		} catch (SQLException e) {
@@ -98,8 +102,10 @@ public class ItensCardapioDAOImp implements ItensCardapioDAO{
 			
 			int res = pst.executeUpdate();
 			if (res > 0) {
+				commit();
 				return "Alterado com sucesso.";
 			} else {
+				rollback();
 				return "Erro ao alterar.";
 			}
 		} catch (SQLException e) {
@@ -107,6 +113,38 @@ public class ItensCardapioDAOImp implements ItensCardapioDAO{
 		} finally {
 			ConnectionFactory.close(con);
 		}
+	}
+	
+	public String rollback() {
+		String sql = "call voltar()";
+		Connection con = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.executeUpdate();
+			return "Alterações desfeitas";
+
+		} catch (SQLException e) {
+			return e.getMessage();
+			
+		} finally {
+			ConnectionFactory.close(con);
+		}
+		
+	}
+	
+	public void commit() {
+		String sql = "call salvar()";
+		Connection con = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.executeQuery();
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(con);
+		}
+		
 	}
 
 }

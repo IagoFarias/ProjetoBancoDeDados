@@ -91,18 +91,28 @@ public class FrmItensPedido1 extends JFrame {
 				FrmItensPedido1.this.dispose();
 			}
 		});
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,co.cancelar());
+				FrmItensPedido1.this.dispose();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_1, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(panel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 600, Short.MAX_VALUE)
-							.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-								.addGap(270)
-								.addComponent(btnSalvar))))
-					.addContainerGap(106, Short.MAX_VALUE))
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_1, 0, 0, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(19, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(110)
+					.addComponent(btnSalvar)
+					.addPreferredGap(ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+					.addComponent(btnCancelar)
+					.addGap(178))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -111,7 +121,9 @@ public class FrmItensPedido1 extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-					.addComponent(btnSalvar)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnCancelar)
+						.addComponent(btnSalvar))
 					.addContainerGap())
 		);
 		

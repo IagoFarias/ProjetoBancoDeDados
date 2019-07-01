@@ -3,6 +3,7 @@ package br.com.bd2.lanchonete.controller;
 import java.util.List;
 
 import br.com.bd2.lanchonete.negocio.Cliente;
+import br.com.bd2.lanchonete.negocio.ClienteEstat;
 import br.com.bd2.lanchonete.persistencia.ClienteDAOImp;
 
 
@@ -31,6 +32,16 @@ public class ClienteController {
 	public Cliente pesquisarPorCpf(String cpf) {
 		ClienteDAOImp dao = new ClienteDAOImp();
 		return dao.pesquisarPorCpf(cpf);
+	}
+	
+	public List<ClienteEstat> pesquisarEstat(){
+		ClienteDAOImp dao = new ClienteDAOImp();
+		return dao.pesquisarEstat();
+	}
+	
+	public List<ClienteEstat> pesquisarEstatCpf(String cpf){
+		ClienteDAOImp dao = new ClienteDAOImp();
+		return dao.pesquisarEstatCpf(cpf);
 	}
 
 }

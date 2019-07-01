@@ -3,6 +3,7 @@ package br.com.bd2.lanchonete.controller;
 import java.util.List;
 
 import br.com.bd2.lanchonete.negocio.Fornecedor;
+import br.com.bd2.lanchonete.negocio.FornecedorEstat;
 import br.com.bd2.lanchonete.persistencia.FornecedorDAOImp;
 
 public class FornecedorController {
@@ -31,4 +32,20 @@ public class FornecedorController {
 		FornecedorDAOImp dao = new FornecedorDAOImp();
 		return dao.pesquisarPorCnpj(cnpj);
 	}
+	
+	public List<FornecedorEstat> pesquisarEstat() {
+		FornecedorDAOImp dao = new FornecedorDAOImp();
+		return dao.pesquisarEstat();
+	}
+	
+	public List<FornecedorEstat> pesquisarEstatNomeIng(String nomeIng) {
+		FornecedorDAOImp dao = new FornecedorDAOImp();
+		return dao.pesquisarEstatNomeIng(nomeIng);	
+	}
+	
+	public List<FornecedorEstat> pesquisarEstatNomeForn(String nomeForn) {
+		FornecedorDAOImp dao = new FornecedorDAOImp();
+		return dao.pesquisarEstatNomeForn(nomeForn);	
+	}
+	
 }
